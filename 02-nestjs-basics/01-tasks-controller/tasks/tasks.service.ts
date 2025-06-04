@@ -4,14 +4,38 @@ import { Task } from "./task.model";
 @Injectable()
 export class TasksService {
   private tasks: Task[] = [];
-
-  getAllTasks(): Task[] {}
-
-  getTaskById(id: string): Task {}
-
-  createTask(task: Task): Task {}
-
-  updateTask(id: string, update: Task): Task {}
-
-  deleteTask(id: string): Task {}
+  getAllTasks(): Task[] {
+    return this.tasks;
+      }
+    
+      getTaskById(id: string): Task {
+        const task  = this.tasks.find(t => t.id === id);
+            if (!task) throw new NotFoundException(`task with ${id} not found`);
+            return task;
+      }
+    
+      createTask(task: Task): Task {
+        task  = {
+          id:task.id,
+          title:task.title,
+          description:task.description,
+          status:task.status
+      };
+      this.tasks.push(task);
+      return task;
+      }
+    
+    updateTask(id: string, update: Task): Task {
+    const task=this.getTaskById(id)
+    task.title=update.title;
+    task.description=update.description;
+    task.status=update.status;
+    return task;
+      }
+    
+       deleteTask(id: string): Task {
+        const task  = this.getTaskById(id);
+        this.tasks = this.tasks.filter(u => u.id !== id);
+        return task;
+       }
 }
