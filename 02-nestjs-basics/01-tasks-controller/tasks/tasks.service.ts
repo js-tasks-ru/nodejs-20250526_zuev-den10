@@ -1,10 +1,15 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Task } from "./task.model";
+let currentId =1;
 
 @Injectable()
 export class TasksService {
   private tasks: Task[] = [];
+
+
+
   getAllTasks(): Task[] {
+    console.log(this.tasks)
     return this.tasks;
       }
     
@@ -16,7 +21,7 @@ export class TasksService {
     
       createTask(task: Task): Task {
         task  = {
-          id:task.id,
+          id:`${currentId++}`,
           title:task.title,
           description:task.description,
           status:task.status
