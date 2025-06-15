@@ -40,5 +40,19 @@ export class TasksService {
     status?: TaskStatus,
     page?: number,
     limit?: number,
-  ): Task[] {}
+  ): Task[] {
+
+    let filteredTasks = [...this.tasks];
+
+    if (status) {
+      filteredTasks = filteredTasks.filter(task => task.status === status);
+    }
+  
+    // Пагинация
+    const offset = (page - 1) * limit;
+    const paginatedTasks = filteredTasks.slice(offset, offset + limit);
+  
+    return paginatedTasks;
+  }
+
 }
