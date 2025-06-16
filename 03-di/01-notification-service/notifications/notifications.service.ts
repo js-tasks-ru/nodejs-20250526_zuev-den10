@@ -5,7 +5,7 @@ export class NotificationsService {
 
 sendEmail(to: string, subject: string, message: string): void{
     if (to.length>0){
-        console.log(`Email sent to ${to}: [${subject}]  ${message}`)
+        console.log(`${message}`)
     }else{
         throw new BadRequestException('email is empty');
     }
@@ -17,7 +17,7 @@ sendEmail(to: string, subject: string, message: string): void{
       
 
         if (to.length>0){
-            console.log(`SMS sent to ${to}: Статус задачи ${message}`)
+            console.log(`${message}`)
         }else{
             throw new BadRequestException('number is empty');
         }

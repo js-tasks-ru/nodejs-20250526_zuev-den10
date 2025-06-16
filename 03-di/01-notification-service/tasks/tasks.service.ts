@@ -19,11 +19,10 @@ export class TasksService {
       assignedTo,
     };
     this.tasks.push(task);
-
-    const user =this.usersService.getUserById(Number(task.id))
+    const user =this.usersService.getUserById(Number(createTaskDto.assignedTo))
     const to = user.email
-    const message =`Вы назначены ответственным за задачу: \"${title}\"` 
     const subject = `Новая задача`
+    const message =`Вы назначены ответственным за задачу: \"${title}\"` 
    const notifications = this.notificationsService.sendEmail(to,subject,message)
     return task;
   }
